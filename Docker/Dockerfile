@@ -5,8 +5,7 @@ ARG user
 ARG uid
 
 # Install system dependencies
-RUN apt-get -y update && apt-get install -y \
-    git \
+RUN apt-get -y update && apt-get install -y git \
     curl \
     libpng-dev \
     libonig-dev \
