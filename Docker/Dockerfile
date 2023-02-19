@@ -5,7 +5,7 @@ ARG user
 ARG uid
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y apt-transport-https \
+RUN apt-get -y update && apt-get install -y apt-transport-https \
     git \
     curl \
     libpng-dev \
