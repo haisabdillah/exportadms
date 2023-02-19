@@ -1,11 +1,11 @@
-FROM php:8.1.16-fpm-bullseye
+FROM php:8.1.16-fpm-alpine3.17
 
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
 
 # Install system dependencies
-RUN apt-get update && apt-get install --assume-yes curl \
+RUN apk update && apk install -y curl \
     git \
     libpng-dev \
     libonig-dev \
@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install --assume-yes curl \
     unzip
 
 # Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apk clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
