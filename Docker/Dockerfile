@@ -5,7 +5,7 @@ ARG user
 ARG uid
 
 # Install system dependencies
-RUN apk update && apk install -y curl libpng-dev libonig-dev  libxml2-dev  zip unzip
+RUN apk add --update --no-cache git curl libpng-dev libonig-dev  libxml2-dev  zip unzip
 
 # Clear cache
 RUN apk clean && rm -rf /var/lib/apt/lists/*
