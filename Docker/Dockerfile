@@ -5,8 +5,8 @@ ARG user
 ARG uid
 
 # Install system dependencies
-RUN apt-get -y update && apt-get install -y git \
-    curl \
+RUN apt-get -y update && apt-get install -y curl \
+    git \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
