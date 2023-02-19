@@ -5,7 +5,7 @@ ARG user
 ARG uid
 
 # Install system dependencies
-RUN apt-get -y update && apt-get install -y apt-transport-https \
+RUN apk -y update && apk install -y \
     git \
     curl \
     libpng-dev \
@@ -15,7 +15,7 @@ RUN apt-get -y update && apt-get install -y apt-transport-https \
     unzip
 
 # Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apk clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
