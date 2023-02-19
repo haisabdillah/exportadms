@@ -18,7 +18,7 @@ services:
     container_name: nginx
     restart: unless-stopped
     ports:
-      - 8000:80
+      - ${DOCKER_PORT}:80
     volumes:
       - ./:/var/www
       - ./Docker/nginx.conf:/etc/nginx/conf.d/default.conf
