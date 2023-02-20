@@ -4,6 +4,8 @@ FROM php:8.1-fpm
 ARG user
 ARG uid
 
+ENV PHP_MEMORY_LIMIT=128M
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
@@ -19,6 +21,11 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+RUN cd /usr/local/etc/php/conf.d/ && \
+  echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini && \
+  echo 'max_execution_time = 600' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini
+
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

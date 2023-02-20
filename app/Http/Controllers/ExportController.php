@@ -66,7 +66,7 @@ class ExportController extends Controller
             $pdf = PDF::loadview('export-absent',$data)->setPaper('a4', 'landscape');
             return $pdf->stream('asdasd.pdf',['attachment; filename="my_filename.txt"']);
         } catch (\Throwable $th) {
-           return response()->json(['error' => 'Internal Server Error'], 500);
+           return response()->json(['error' => $th->getMessages()], 500);
         }
 
     }
