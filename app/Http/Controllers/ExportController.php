@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ExportController extends Controller
 {
+    public function view(){
+        return view('pages.export');
+    }
     public function export(){
         $validator = Validator::make(request()->all(), [
             'employee' => 'nullable|array',
@@ -63,7 +66,7 @@ class ExportController extends Controller
                 'count' => $count,
                 'data' => $presence
             ];
-            $pdf = PDF::loadview('export-absent',$data)->setPaper('a4', 'landscape');
+            $pdf = PDF::loadview('pdf.export-absent',$data)->setPaper('a4', 'landscape');
             return $pdf->stream('asdasd.pdf',['attachment; filename="my_filename.txt"']);
         } catch (\Throwable $th) {
            return response()->json(['error' => $th->getMessages()], 500);
