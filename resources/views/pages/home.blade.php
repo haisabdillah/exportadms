@@ -13,7 +13,7 @@
                     </a>
                 </div>
                 <div class="col-xs-6 col-md-4">
-                    <a class="card bg-primary" href="{{route('attendance.view')}}">
+                    <a class="card bg-primary" href="{{route('export.view')}}">
                         <div class="card-body text-white text-center">
                             <i class='fas fa-file-export' style='font-size:36px'></i>
                             <div class="text-bold mt-1"> Export Atendance</div>
