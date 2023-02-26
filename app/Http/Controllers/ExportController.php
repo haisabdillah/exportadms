@@ -26,6 +26,9 @@ class ExportController extends Controller
         $deptId = request('department_id');
         $start= request('start');
         $end = request('end');
+        if (\Carbon\Carbon::parse($end)->format('Y-m-d') > \Carbon\Carbon::now()->format('Y-m-d')) {
+            $end = \Carbon\Carbon::now()->format('Y-m-d');
+        }
         try {
             $dateRange = \Carbon\CarbonPeriod::create($start,$end);
             $count = 0;
