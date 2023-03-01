@@ -86,7 +86,7 @@
                         results: data
                     };
                 },
-                cache: true
+                cache: false
                 // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
         });
@@ -120,7 +120,7 @@
                         results: data
                     };
                 },
-                cache: true
+                cache: false
                 // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
             }
     })
@@ -188,11 +188,11 @@
                         {name: 'pdf', extend: 'pdf', filename: title, title: null},
                     ],
                     initComplete:function(){
-                        
+
                     $('#generate').html('Generate').removeAttr('disabled')
                     }
             });
-        
+
     })
 </script>
     @endpush

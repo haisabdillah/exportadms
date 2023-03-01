@@ -91,11 +91,12 @@ class ExportController extends Controller
         $deptId = request('department_id');
         $search = request('search');
         $data = DB::table('userinfo')
-                ->join('departments','departments.DeptID','userinfo.defaultdeptid')
-                ->where('departments.DeptID',$deptId)
-                ->when($search,function($q) use ($search){
-                    $q->where('userinfo.badgenumber','like','%'.$search.'%');
-                    $q->orWhere('userinfo.name','like','%'.$search.'%');
+                ->when($search,function($q) use ($search,$deptId){
+                    $q->where('userinfo.defaultdeptid',$deptId);
+                    //$q->where('userinfo.badgenumber','like','%'.$search.'%');
+                    $q->where('userinfo.name','like','%'.$search.'%');
+                },function($q){
+                    $q->limit(0);
                 })
                ->select('badgenumber as id',DB::raw("CONCAT(userinfo.badgenumber,' - ',userinfo.name) AS text"))->get();
         return response()->json($data, 200);
