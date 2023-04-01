@@ -1,9 +1,5 @@
 FROM php:8.1-fpm
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
-
 ENV PHP_MEMORY_LIMIT=128M
 
 # Install system dependencies
@@ -26,16 +22,21 @@ RUN cd /usr/local/etc/php/conf.d/ && \
   echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini && \
   echo 'max_execution_time = 600' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini
 
-
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
+COPY . /var/www/
+
+# Copy directory project permission ke container
+COPY --chown=www-data:www-data . /var/www/
+RUN chown -R www-data:www-data /var/www
+
+RUN composer install
 
 # Set working directory
 WORKDIR /var/www
 
-USER $user
+# Expose port 9000
+EXPOSE 9000
+
+USER www-data

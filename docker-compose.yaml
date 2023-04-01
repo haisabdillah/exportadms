@@ -5,7 +5,6 @@ services:
       args:
         user: abi
         uid: 1000
-      context: ./Docker/
       dockerfile: Dockerfile
     image: exportadms
     restart: unless-stopped
